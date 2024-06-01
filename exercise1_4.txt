@@ -1,0 +1,18 @@
+docker run -it --name ex1_4 --rm ubuntu sh -c 'while true; do echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website; done'
+
+Then, from another terminal:
+docker exec ex1_4 apt-get update
+docker exec ex1_4 apt-get -y install curl
+
+Back to the first teminal; input: helsinki.fi
+
+Output:
+Searching..
+<html>
+<head><title>301 Moved Permanently</title></head>
+<body>
+<center><h1>301 Moved Permanently</h1></center>
+<hr><center>nginx/1.22.1</center>
+</body>
+</html>
+Input website:
