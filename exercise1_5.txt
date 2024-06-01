@@ -7,6 +7,9 @@ REPOSITORY                          TAG       IMAGE ID       CREATED       SIZE
 devopsdockeruh/simple-web-service   ubuntu    4e3362e907d5   3 years ago   83MB
 devopsdockeruh/simple-web-service   alpine    fd312adc88e0   3 years ago   15.7MB
 
+# The alpine version is indeed much smaller than the ubuntu version (15.7MB vs 83MB).
+# To make sure the secret message functinality is the same, do:
+
 docker run -d --name ex1_5 devopsdockeruh/simple-web-service:alpine
 docker exec -it ex1_5 sh
 
