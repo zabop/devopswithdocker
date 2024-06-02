@@ -1,0 +1,17 @@
+FROM ubuntu:22.04
+EXPOSE 5001
+
+RUN apt-get update
+RUN apt-get -y install curl git
+
+RUN git clone https://github.com/docker-hy/material-applications.git
+WORKDIR /material-applications/example-frontend
+
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
+RUN apt-get install -y nodejs
+RUN npm install
+
+ENV REACT_APP_BACKEND_URL=http://localhost:8000
+RUN npm run build
+RUN npm install -g serve
+CMD ["serve", "-s", "-l", "5000", "build"]
