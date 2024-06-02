@@ -1,0 +1,2 @@
+docker build . --tag web-server
+docker run -p 1212:8080 web-server
