@@ -16,22 +16,9 @@ Screenshot of result:
 
 ![](https://raw.githubusercontent.com/zabop/devopswithdockerpart1/master/exercise1_15/result.png)
 
-# History
+---
 
-Build for the first time:
+The image was built and pushed to Docker Hub via:
 
     docker build . --tag zabop/tippecanoe
-
-Tile dataset:
-
-    docker run -it --rm -v "$(pwd)/geodata:/data" zabop/tippecanoe tippecanoe --output=/data/out.mbtiles --force /data/source.geojson
-
-View result:
-
-    mbview geodata/out.mbtiles
-
-([More info on mbview](https://github.com/Glint-Solar/mbview))
-
-Push to Docker Hub:
-
     docker push zabop/tippecanoe
