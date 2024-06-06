@@ -1,6 +1,6 @@
 Prepare repo:
 
-git clone git@github.com:docker-hy/material-applications.git && cd material-applications/scaling-exercise
+    git clone git@github.com:docker-hy/material-applications.git && cd material-applications/scaling-exercise
 
 Run:
 
