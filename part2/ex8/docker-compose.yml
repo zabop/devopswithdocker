@@ -1,0 +1,51 @@
+version: "3.8"
+
+# Run via mkdir -p database && docker-compose up
+# Test on http://localhost:5001/
+
+services:
+  proxy:
+    image: nginx:1.19-alpine
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    depends_on:
+      - frontend
+      - backend
+  backend:
+    image: backend
+    environment:
+      REDIS_HOST: redis
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DATABASE: postgres
+    build:
+      dockerfile: backDockerfile
+    ports:
+      - 8000:8000
+    container_name: backend
+  redis:
+    image: redis
+    container_name: redis
+  db:
+    image: postgres:16.3-alpine3.20
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ./database
+        target: /var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+    container_name: postgres
+  frontend:
+    image: frontend
+    build:
+      dockerfile: frontDockerfile
+    ports:
+      - 5001:5000
+    container_name: frontend
