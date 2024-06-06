@@ -1,5 +1,8 @@
 version: "3.8"
 
+# Run via: mkdir -p database && docker compose up
+# Then visit http://localhost/.
+
 services:
   proxy:
     image: nginx:1.19-alpine
