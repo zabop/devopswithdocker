@@ -1,0 +1,24 @@
+version: "3.8"
+
+# Test on http://localhost:5001/
+
+services:
+  backend:
+    image: backend
+    environment:
+      REDIS_HOST: redis
+    build:
+      dockerfile: backDockerfile
+    ports:
+      - 8000:8000
+    container_name: backend
+  redis:
+    image: redis
+    container_name: redis
+  frontend:
+    image: frontend
+    build:
+      dockerfile: frontDockerfile
+    ports:
+      - 5001:5000
+    container_name: frontend
