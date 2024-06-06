@@ -1,0 +1,15 @@
+version: "3.8"
+
+# Make sure text.log exists before docker compose up:
+# rm -f text.log && touch text.log
+
+# Use docker container prune if you see complaining about duplicate names.
+
+services:
+  logger-service:
+    image: devopsdockeruh/simple-web-service:ubuntu
+    volumes:
+      - type: bind
+        source: ./text.log
+        target: /usr/src/app/text.log
+    container_name: logger
