@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# example call: ./builder.sh mluukkai/express_app zabop/testing
+
 set -o errexit
 set -o nounset
 set -o pipefail
