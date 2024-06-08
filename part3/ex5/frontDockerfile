@@ -1,0 +1,26 @@
+FROM ubuntu:22.04
+
+# Build: docker build --file frontDockerfile . --tag front
+# Run: docker run -p 5001:5000 front
+# Visit: http://localhost:5001/
+
+EXPOSE 5001
+
+RUN apt-get update
+RUN apt-get -y install curl git
+
+RUN git clone https://github.com/docker-hy/material-applications.git
+WORKDIR /material-applications/example-frontend
+
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
+RUN apt-get install -y nodejs
+RUN npm install
+
+RUN npm run build
+RUN npm install -g serve
+
+RUN useradd -m appuser
+RUN chown appuser .
+USER appuser
+
+CMD ["serve", "-s", "-l", "5000", "build"]
