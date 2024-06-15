@@ -5,3 +5,5 @@ Try alpine tippecanoe yourself!
 
     mkdir -p geodata && curl https://raw.githubusercontent.com/zabop/devopswithdocker/master/part3/ex10/geodata/source.geojson --output geodata/source.geojson
     docker run -it --rm -v "$(pwd)/geodata:/data" zabop/tippecanoe --output=/data/out.mbtiles --force /data/source.geojson
+
+The resulting mbtiles file: `geodata/out.mbtiles`.
