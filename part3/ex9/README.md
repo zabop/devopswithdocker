@@ -1,0 +1,1 @@
+The size of the image built from [`backDockerfile`](https://github.com/zabop/devopswithdocker/blob/master/part3/ex9/backDockerfile) is **17.1 MB**, much smaller than the **457 MB** image seen in [Exercise 3.7](https://github.com/zabop/devopswithdocker/tree/master/part3/ex7).
