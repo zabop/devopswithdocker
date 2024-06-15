@@ -1,0 +1,25 @@
+FROM golang:1.16-alpine
+
+# Build: docker build --file backDockerfile . --tag back
+
+# Run: docker run --publish 8080:8080 back
+
+EXPOSE 8080
+
+WORKDIR /go/src/app
+
+RUN apk add --no-cache git && \
+    git clone https://github.com/docker-hy/material-applications.git
+
+WORKDIR /go/src/app/material-applications/example-backend
+
+RUN go build
+
+RUN adduser --disabled-password appuser && \
+    chown appuser . && \
+    apk del git && \
+    rm -rf /var/cache/apk/*
+
+USER appuser
+
+CMD ["./server"]
