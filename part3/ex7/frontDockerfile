@@ -1,0 +1,28 @@
+FROM node:16-alpine
+
+# Build: docker build --file frontDockerfile . --tag front
+# Run: docker run -p 5001:5000 front
+# Visit: http://localhost:5001/
+
+EXPOSE 5001
+
+
+
+RUN apk add --no-cache git && \
+    git clone https://github.com/docker-hy/material-applications.git
+
+WORKDIR /material-applications/example-frontend
+
+
+RUN npm install && \
+    npm run build && \
+    npm install -g serve
+
+RUN adduser --disabled-password appuser && \
+    chown appuser . && \
+    apk del git && \
+    rm -rf /var/cache/apk/*
+
+USER appuser
+
+CMD ["serve", "-s", "-l", "5000", "build"]
