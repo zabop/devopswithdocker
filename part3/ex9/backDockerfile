@@ -1,0 +1,22 @@
+FROM golang:1.16-alpine AS build-stage
+
+# Build: docker build --file backDockerfile . --tag back
+# Run: docker run --publish 8080:8080 back
+
+WORKDIR /go/src/app
+
+RUN apk add --no-cache git && \
+    git clone https://github.com/docker-hy/material-applications.git
+
+WORKDIR /go/src/app/material-applications/example-backend
+
+RUN CGO_ENABLED=0 GOOS=linux go build
+# based on https://stackoverflow.com/a/55106860/8565438
+
+FROM scratch
+COPY --from=build-stage /go/src/app/material-applications/example-backend/server /go/src/app/material-applications/example-backend/server
+
+EXPOSE 8080
+
+WORKDIR /go/src/app/material-applications/example-backend
+CMD ["./server"]
