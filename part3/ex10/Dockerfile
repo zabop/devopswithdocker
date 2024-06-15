@@ -15,3 +15,4 @@ RUN apk add --no-cache git g++ make libgcc libstdc++ sqlite-libs sqlite-dev zlib
     && rm -rf /var/cache/apk/*
 
 USER appuser
+ENTRYPOINT [ "tippecanoe" ]
