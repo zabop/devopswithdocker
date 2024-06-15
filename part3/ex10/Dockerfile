@@ -1,4 +1,4 @@
-FROM alpine:latest AS builder
+FROM alpine:latest
 
 # Build: docker build --platform linux/arm64 --tag zabop/tippecanoe . 
 
